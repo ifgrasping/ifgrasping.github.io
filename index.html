@@ -4,6 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IFG — Internet-Scale Functional Grasping</title>
+  <!-- Open Graph (Slack, Discord, Facebook, etc.) -->
+  <meta property="og:title" content="IFG — Internet-Scale Functional Grasping">
+  <meta property="og:description" content="Combining internet-scale vision with dexterous grasp generation. From Carnegie Mellon University.">
+  <meta property="og:url" content="https://ifgrasping.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://ifgrasping.github.io/assets/media/teaser.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IFG — Internet-Scale Functional Grasping">
+  <meta name="twitter:description" content="Combining internet-scale vision with dexterous grasp generation.">
+  <meta name="twitter:image" content="https://ifgrasping.github.io/assets/media/teaser.png">
+  <meta name="twitter:url" content="https://ifgrasping.github.io/">
+
   <meta name="description" content="IFG: Internet-Scale Functional Grasping — Project page." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,14 +139,9 @@
       <h3 class="subsection-title center">Single Object Grasp Examples</h3>
       <div class="grid cols-3">
         <figure>
-          <model-viewer
-            src="https://github.com/ifgrasping/ifgrasping.github.io/releases/download/assets/bottle_cap2.glb"
-            camera-controls
-            auto-rotate
-            loading="lazy"
-            crossorigin="anonymous"
-            class="grasp-viewer">
-          </model-viewer>
+          <model-viewer src="assets/models_downsized/single_object/bottle_cap2_safe.glb"
+                        camera-controls auto-rotate loading="eager"
+                        class="grasp-viewer"></model-viewer>
           <figcaption class="center">water bottle</figcaption>
         </figure>
 
@@ -149,14 +160,14 @@
         </figure> -->
 
         <figure>
-          <model-viewer src="assets/models/single_object/hammer.glb"
+          <model-viewer src="assets/models_downsized/single_object/hammer_safe.glb"
                         camera-controls auto-rotate loading="lazy"
                         class="grasp-viewer"></model-viewer>
           <figcaption class="center">Hammer</figcaption>
         </figure>
 
         <figure>
-          <model-viewer src="assets/models/single_object/spoon.glb"
+          <model-viewer src="assets/models_downsized/single_object/spoon_safe.glb"
                         camera-controls auto-rotate loading="lazy"
                         class="grasp-viewer"></model-viewer>
           <figcaption class="center">Large Spoon</figcaption>
@@ -167,28 +178,28 @@
       <h3 class="subsection-title center" style="margin-top: 40px;">Crowded Scene Grasp Examples</h3>
       <div class="grid cols-1 crowded-grid">
       <figure>
-        <model-viewer src="assets/models/crowded_scene/scene_0032_1_0000_mask0_idx7.glb"
+        <model-viewer src="assets/models_downsized/crowded_scene/scene_0032_draco.glb"
                       camera-controls auto-rotate loading="lazy"
                       class="grasp-viewer"></model-viewer>
         <figcaption class="center">Clustered Scene 1</figcaption>
       </figure>
 
       <figure>
-        <model-viewer src="assets/models/crowded_scene/scene_3506_with_grasps.glb"
+        <model-viewer src="assets/models_downsized/crowded_scene/scene_3506_draco.glb"
                       camera-controls auto-rotate loading="lazy"
                       class="grasp-viewer"></model-viewer>
         <figcaption class="center">Clustered Scene 2</figcaption>
       </figure>
 
       <figure>
-        <model-viewer src="assets/models/crowded_scene/scene_7122_with_grasps.glb"
+        <model-viewer src="assets/models_downsized/crowded_scene/scene_7122_draco.glb"
                       camera-controls auto-rotate loading="lazy"
                       class="grasp-viewer"></model-viewer>
         <figcaption class="center">Clustered Scene 3</figcaption>
       </figure>
 
       <figure>
-        <model-viewer src="assets/models/crowded_scene/scene_9033_with_grasps.glb"
+        <model-viewer src="assets/models_downsized/crowded_scene/scene_9033_draco.glb"
                       camera-controls auto-rotate loading="lazy"
                       class="grasp-viewer"></model-viewer>
         <figcaption class="center">Clustered Scene 4</figcaption>

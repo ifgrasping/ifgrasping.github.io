@@ -1,1 +1,5 @@
-3d_assets/
+# Ignore all large original models
+assets/models/
+
+# But keep downsized versions
+!assets/models_downsized/

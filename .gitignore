@@ -1,0 +1,8 @@
+# Ignore all large original models
+assets/models/
+
+# But keep downsized versions
+!assets/models_downsized/
+
+# Local-only named site backup for anonymous submissions
+index.named.local.html

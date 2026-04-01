@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IFG — Internet-Scale Functional Grasping</title>
+  <!-- Open Graph (Slack, Discord, Facebook, etc.) -->
+  <meta property="og:title" content="IFG — Internet-Scale Functional Grasping">
+  <meta property="og:description" content="Combining internet-scale vision with dexterous grasp generation.">
+  <meta property="og:url" content="https://ifgrasping.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://ifgrasping.github.io/assets/media/teaser.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IFG — Internet-Scale Functional Grasping">
+  <meta name="twitter:description" content="Combining internet-scale vision with dexterous grasp generation.">
+  <meta name="twitter:image" content="https://ifgrasping.github.io/assets/media/teaser.png">
+  <meta name="twitter:url" content="https://ifgrasping.github.io/">
+
+  <meta name="description" content="IFG: Internet-Scale Functional Grasping — Project page." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }, svg: { fontCache: 'global' } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">IFG</a>
+      <div class="links">
+        <a href="#abstract">Abstract</a>
+        <a href="#grasps">Grasps</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top" class="container">
+    <!-- HERO -->
+    <header class="hero">
+      <h1 class="title">IFG: Internet-Scale Functional Grasping</h1>
+      <!-- subtitle removed per request -->
+      <p class="authors">Anonymous Authors</p>
+      <div class="teaser">
+        <img src="assets/media/teaser.png" alt="IFG teaser"/>
+      </div>
+    </header>
+
+    <!-- ABSTRACT -->
+    <section id="abstract">
+      <h2 class="section-title">Abstract</h2>
+      <div class="card">
+        <p>
+          Large Vision Models trained on internet-scale data have demonstrated strong capabilities in segmenting and semantically understanding object parts, even in cluttered scenes. However, while these models can direct a robot toward the general region of an object, they lack the geometric understanding required to precisely control dexterous robotic hands for 3D grasping. To overcome this, our key insight is to leverage simulation with a force-closure grasping generation pipeline that understands local geometries of the hand and object in the scene. Because this pipeline is slow and requires ground-truth observations, the generated dataset is distilled into a diffusion model that can operate on camera point clouds. By combining the global semantic understanding of internet-scale models with the geometric precision of a simulation-based locally-aware force-closure, IFG achieves high-performance semantic grasping without any manually collected training data. 
+        </p>
+      </div>
+
+    </section>
+
+    <!-- Unified Grasps Section -->
+    <section id="grasps">
+      <h2 class="section-title">Grasps</h2>
+
+      <!-- SINGLE OBJECT GRASPS -->
+      <h3 class="subsection-title center">Single Object Grasp Examples</h3>
+      <div class="grid cols-3">
+        <figure>
+          <model-viewer src="assets/models_downsized/single_object/bottle_cap2_safe.glb"
+                        camera-controls auto-rotate loading="eager"
+                        class="grasp-viewer"></model-viewer>
+          <figcaption class="center">water bottle</figcaption>
+        </figure>
+
+        <!-- <figure>
+          <model-viewer src="assets/models/single_object/bottle2_cap2.glb"
+                        camera-controls auto-rotate loading="lazy"
+                        class="grasp-viewer"></model-viewer>
+          <figcaption class="center">ranch bottle</figcaption>
+        </figure>
+
+        <figure>
+          <model-viewer src="assets/models/single_object/bottle3_cap.glb"
+                        camera-controls auto-rotate loading="lazy"
+                        class="grasp-viewer"></model-viewer>
+          <figcaption class="center">jar</figcaption>
+        </figure> -->
+
+        <figure>
+          <model-viewer src="assets/models_downsized/single_object/hammer_safe.glb"
+                        camera-controls auto-rotate loading="lazy"
+                        class="grasp-viewer"></model-viewer>
+          <figcaption class="center">Hammer</figcaption>
+        </figure>
+
+        <figure>
+          <model-viewer src="assets/models_downsized/single_object/spoon_safe.glb"
+                        camera-controls auto-rotate loading="lazy"
+                        class="grasp-viewer"></model-viewer>
+          <figcaption class="center">Large Spoon</figcaption>
+        </figure>
+      </div>
+
+      <!-- CROWDED SCENE GRASPS -->
+      <h3 class="subsection-title center" style="margin-top: 40px;">Crowded Scene Grasp Examples</h3>
+      <div class="grid cols-1 crowded-grid">
+      <figure>
+        <model-viewer src="assets/models_downsized/crowded_scene/scene_0032_mobile.glb"
+                      camera-controls auto-rotate loading="lazy"
+                      class="grasp-viewer"></model-viewer>
+        <figcaption class="center">Clustered Scene 1</figcaption>
+      </figure>
+
+      <figure>
+        <model-viewer src="assets/models_downsized/crowded_scene/scene_3506_mobile.glb"
+                      camera-controls auto-rotate loading="lazy"
+                      class="grasp-viewer"></model-viewer>
+        <figcaption class="center">Clustered Scene 2</figcaption>
+      </figure>
+
+      <figure>
+        <model-viewer src="assets/models_downsized/crowded_scene/scene_7122_mobile.glb"
+                      camera-controls auto-rotate loading="lazy"
+                      class="grasp-viewer"></model-viewer>
+        <figcaption class="center">Clustered Scene 3</figcaption>
+      </figure>
+
+      <figure>
+        <model-viewer src="assets/models_downsized/crowded_scene/scene_9033_mobile.glb"
+                      camera-controls auto-rotate loading="lazy"
+                      class="grasp-viewer"></model-viewer>
+        <figcaption class="center">Clustered Scene 4</figcaption>
+      </figure>
+    </div>
+    </section>
+
+
+    <!-- METHOD -->
+    <section id="method">
+      <h2 class="section-title">Method</h2>
+
+      <!-- ONE unified card for both overview + pipeline -->
+      <div class="card method-merged">
+
+        <!-- Overview -->
+        <h3 class="method-subtitle">Overview</h3>
+        <figure class="method-overview">
+          <img src="assets/media/method_flowchart.png" alt="Method overview">
+          <figcaption>
+            IFG takes an object mesh and a task prompt as input. To incorporate semantic understanding, it renders the object from multiple
+            viewpoints, applies a VLM-based segmentation model combining SAM and VLPart, and reprojects the results into 3D space to identify
+            task-relevant regions. For geometric grounding, it initializes a force closure objective at these regions and optimizes for functional grasps.
+            The resulting data is then used to train a diffusion model for fast grasp synthesis from depth.
+          </figcaption>
+        </figure>
+
+        <!-- Pipeline -->
+        <h3 class="method-subtitle" style="margin-top: 32px;">Pipeline</h3>
+        <div class="pipeline-grid">
+          <div class="pipeline-block pastel-1">
+            <h4>1) Inputs & Useful Region Proposal</h4>
+            <p>
+              IFG renders multi-view images and applies VLM-guided segmentation (SAM + VLPart) to extract task-relevant parts. These are
+              reprojected to 3D and aggregated per mesh face to identify a “useful region” that localizes functional geometry.
+            </p>
+          </div>
+
+          <div class="pipeline-block pastel-2">
+            <h4>2) Geometric Grasp Synthesis</h4>
+            <p>
+              Candidate hand poses are sampled near the useful region. A force-closure-based energy with joint limits and collision penalties is
+              minimized to produce physically valid and functional grasps.
+            </p>
+          </div>
+
+          <div class="pipeline-block pastel-3">
+            <h4>3) Simulation Evaluation</h4>
+            <p>
+              Each grasp is perturbed and tested in Isaac Gym on tasks such as Lift and Pick&Shake. Success rates across perturbations become
+              continuous labels, and unstable grasps are filtered out.
+            </p>
+          </div>
+
+          <div class="pipeline-block pastel-4">
+            <h4>4) Diffusion Policy Distillation</h4>
+            <p>
+              A diffusion model is trained to map a noisy grasp and depth-based BPS input to a final grasp. This combines semantic priors from VLMs
+              and geometric accuracy from optimization for fast inference.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+<section id="results">
+  <h2 class="section-title">Results</h2>
+
+  <div class="result-phase-container" style="background-color: #fcfcfc; border: 1px solid #eee; padding: 20px; border-radius: 12px; margin-bottom: 40px;">
+    <h3 class="phase-title" style="color: #d32f2f; text-transform: uppercase; font-weight: 800;">Phase 1: Synthetic Data Generation (Optimization)</h3>
+    <p>This section evaluates our simulation-based pipeline's ability to generate high-quality "ground truth" labels. This "Teacher" data is what we use to train our final model.</p>
+
+    <h4 class="subsection-title">1.1 Functional Alignment</h4>
+    <figure class="card qualitative-fullrow">
+      <img src="assets/media/results_qualitative.png" alt="Qualitative Comparisons" loading="lazy">
+      <figcaption class="center"><b>Qualitative Comparison:</b> IFG seeds optimization on semantic regions (e.g., handles), ensuring grasps are not just stable, but functional.</figcaption>
+    </figure>
+
+    <h4 class="subsection-title" style="margin-top:32px;">1.2 Single-Object Generation Metrics</h4>
+    <div class="grid cols-2" style="align-items: start;">
+      <div class="table-wrap card">
+        <div class="table-caption">Table: Full Single-Object Generation Success (Lift)</div>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Object</th>
+              <th>Get a Grip</th>
+              <th>IFG (Ours)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Water Bottle</td><td>49.1</td><td><strong>62.8</strong></td></tr>
+            <tr><td>Large Detergent</td><td>51.2</td><td><strong>62.5</strong></td></tr>
+            <tr><td>Spray Bottle</td><td>43.1</td><td><strong>54.5</strong></td></tr>
+            <tr><td>Pan</td><td>48.1</td><td><strong>52.1</strong></td></tr>
+            <tr><td>Small Lamp</td><td>56.8</td><td><strong>85.7</strong></td></tr>
+            <tr><td>Spoon</td><td>42.7</td><td><strong>50.9</strong></td></tr>
+            <tr><td>Vase</td><td>32.2</td><td><strong>55.9</strong></td></tr>
+            <tr><td>Hammer</td><td>45.8</td><td><strong>45.8</strong></td></tr>
+            <tr><td>Shark Plushy</td><td>19.8</td><td><strong>25.1</strong></td></tr>
+            <tr style="border-top: 2px solid #eee; font-weight: bold;">
+              <td>Overall Average</td>
+              <td>50.93</td>
+              <td><strong>51.11</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="card">
+        <img src="assets/media/generalization_1.png" alt="Single Object Top-k Success" loading="lazy">
+        <figcaption class="center"><b>Top-k Success:</b> Success rates for single object generation across varying numbers of grasp attempts.</figcaption>
+      </figure>
+    </div>
+
+    <h4 class="subsection-title" style="margin-top:32px;">1.3 Optimization Pipeline Ablation</h4>
+    <div class="table-wrap card" style="max-width: 850px; margin: 0 auto;">
+      <div class="table-caption">Table: Incremental Pipeline Improvements (Success %)</div>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Configuration</th>
+            <th>Single (Lift)</th>
+            <th>Cluttered (Lift)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Single camera only</td><td>47.83</td><td>18.53</td></tr>
+          <tr><td>+ Multi-camera views</td><td>48.37</td><td>24.70</td></tr>
+          <tr><td>+ Two-means clustering</td><td>49.04</td><td>31.59</td></tr>
+          <tr><td><strong>Full IFG Pipeline</strong></td><td><strong>51.11</strong></td><td><strong>32.23</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="result-phase-container" style="background-color: #f9fbfd; border: 1px solid #e3f2fd; padding: 20px; border-radius: 12px;">
+    <h3 class="phase-title" style="color: #1976d2; text-transform: uppercase; font-weight: 800;">Phase 2: Trained Diffusion Model (Inference)</h3>
+    <p>This section evaluates the <b>diffusion model</b> distilled from grasps generated from the synthetic pipeline. Unlike the optimizer, this model runs in real-time and only sees raw point cloud data from a single depth camera.</p>
+
+    <h4 class="subsection-title">2.1 Full Crowded Scene Performance</h4>
+    <div class="table-wrap card">
+      <div class="table-caption">Table: Full Performance Breakdown on 35 Dense Test Scenes (Lift Success %)</div>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Object Category</th>
+            <th>DexGraspNet2</th>
+            <th>GraspTTA</th>
+            <th>ISAGrasp</th>
+            <th>IFG (Ours)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Tomato Soup Can</td><td>47.8</td><td>38.3</td><td><strong>52.0</strong></td><td>45.5</td></tr>
+          <tr><td>Mug</td><td>33.2</td><td>26.9</td><td>22.6</td><td><strong>60.4</strong></td></tr>
+          <tr><td>Drill</td><td>32.1</td><td>20.8</td><td>36.4</td><td><strong>57.5</strong></td></tr>
+          <tr><td>Scissors</td><td>9.7</td><td>0.0</td><td><strong>33.7</strong></td><td>20.2</td></tr>
+          <tr><td>Screw Driver</td><td>0.0</td><td>8.3</td><td><strong>40.0</strong></td><td>22.0</td></tr>
+          <tr><td>Shampoo Bottle</td><td>50.6</td><td>25.4</td><td>18.8</td><td><strong>53.1</strong></td></tr>
+          <tr><td>Elephant Figure</td><td>23.6</td><td>29.6</td><td>24.2</td><td><strong>35.8</strong></td></tr>
+          <tr><td>Peach Can</td><td><strong>61.8</strong></td><td>28.0</td><td>55.3</td><td>60.3</td></tr>
+          <tr><td>Face Cream Tube</td><td>32.1</td><td>22.5</td><td>20.7</td><td><strong>35.5</strong></td></tr>
+          <tr><td>Tape Roll</td><td>22.7</td><td>13.9</td><td>9.8</td><td><strong>43.2</strong></td></tr>
+          <tr><td>Camel Toy</td><td>12.8</td><td>14.3</td><td>21.3</td><td><strong>21.8</strong></td></tr>
+          <tr><td>Body Wash</td><td>40.2</td><td>22.3</td><td>29.4</td><td><strong>58.3</strong></td></tr>
+          <tr style="background-color: #e3f2fd; font-weight: bold; border-top: 2px solid #1976d2;">
+            <td>Object Average (Hard)</td>
+            <td>30.55</td><td>20.86</td><td>30.35</td><td><strong>42.80</strong></td>
+          </tr>
+          <tr style="font-weight: bold;">
+            <td>Scene Average (Overall)</td>
+            <td><strong>36.71</strong></td><td>25.64</td><td>32.51</td><td>34.16</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="subsection-title" style="margin-top:32px;">2.2 Generalization and Coverage Analysis</h4>
+    <div class="grid cols-2" style="margin-top:24px;">
+      <figure class="card">
+        <img src="assets/media/concentration_grasps5.png" alt="Balanced Coverage Plot" loading="lazy">
+        <figcaption class="center"><b>Concentration vs. Coverage:</b> Baselines focus on easy objects. IFG ensures the robot can target any object in the cluster.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="assets/media/generalization_3.png" alt="Cluttered Scene Success Rate" loading="lazy">
+        <figcaption class="center"><b>Threshold Sensitivity:</b> Success rates across different lift height requirements in cluttered scenes.</figcaption>
+      </figure>
+    </div>
+
+    <div class="card" style="margin-top: 24px; padding: 20px; border-left: 5px solid #1976d2; background: #fff;">
+      <h4>Discussion: The "Balanced Coverage" Advantage</h4>
+      <p>
+        While overall "Scene Averages" can be skewed by models that only pick the easiest objects in a pile, our <b>Object Average (42.80% vs 30.55%)</b> proves that IFG learns to handle a wider variety of geometries. By seeding the model with VLM semantic knowledge, we prevent the "student" from overfitting to simple shapes and encourage a deeper understanding of functional grasping.
+      </p>
+    </div>
+  </div>
+</section>
+
+    </section>
+    <footer>
+      <div class="container">
+        <div>Anonymous Authors</div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
